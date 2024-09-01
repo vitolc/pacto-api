@@ -1,6 +1,8 @@
 package com.vitulc.pactotestapi.enums;
 
-public enum UserRoles {
+public enum UserRole {
    ADMIN,
     USER
 }
+
+

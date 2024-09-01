@@ -1,8 +1,11 @@
 package com.vitulc.pactotestapi.entities;
 
+import com.vitulc.pactotestapi.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users",
@@ -22,6 +25,23 @@ public class User {
 
     @NotBlank
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    @OneToMany(mappedBy = "user")
+    private List<JobApplication> jobApplications;
+
+    public User(String name, String email, String password, UserRole role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User() {
+
+    }
 
     public Long getId() {
         return id;
@@ -53,5 +73,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public List<JobApplication> getJobApplications() {
+        return jobApplications;
+    }
+
+    public void setJobApplications(List<JobApplication> jobApplications) {
+        this.jobApplications = jobApplications;
     }
 }
