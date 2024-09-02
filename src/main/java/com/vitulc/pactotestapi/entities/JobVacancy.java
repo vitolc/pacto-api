@@ -16,6 +16,7 @@ public class JobVacancy {
     private String title;
 
     @NotBlank
+    @Column(length = 2000)
     private String description;
 
     @OneToMany(mappedBy = "jobVacancy")

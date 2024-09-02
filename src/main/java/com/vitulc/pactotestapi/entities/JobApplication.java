@@ -17,6 +17,7 @@ public class JobApplication {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(length = 2000)
     private String coverLetter;
 
     private String phone;
