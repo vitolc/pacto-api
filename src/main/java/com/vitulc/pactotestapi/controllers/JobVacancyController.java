@@ -38,7 +38,7 @@ public class JobVacancyController {
         Page<JobVacancy> jobVacancyPage = jobVacancyService.getAllVacancies(q, page, itemsPerPage, sortDirection);
 
         List<JobVacancyDto> jobVacancyDtos = jobVacancyPage.getContent().stream()
-                .map(vacancy -> new JobVacancyDto(vacancy.getTitle(), vacancy.getDescription()))
+                .map(JobVacancyDto::new)
                 .collect(Collectors.toList());
 
         ResultPageDto<JobVacancy, JobVacancyDto> resultPageDto = ResultPageDto.of(

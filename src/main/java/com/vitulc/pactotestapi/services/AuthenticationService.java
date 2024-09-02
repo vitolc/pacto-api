@@ -41,7 +41,7 @@ public class AuthenticationService {
             throw new BadRequestException("the email is already in use");
         }
 
-        return userService.save(new User(registerDto.username(), registerDto.email(), passwordEncoder.encode(registerDto.password()), UserRole.USER));
+        return userService.save(new User(registerDto.username(), registerDto.email(), registerDto.phone(), passwordEncoder.encode(registerDto.password()), UserRole.USER));
     }
 
     public User loginUser(LoginDto loginDto) {

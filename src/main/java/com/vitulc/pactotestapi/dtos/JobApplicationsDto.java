@@ -1,8 +1,10 @@
 package com.vitulc.pactotestapi.dtos;
 
-import com.vitulc.pactotestapi.entities.JobApplication;
+public class JobApplicationsDto {
 
-public class ApplyVacancyDto{
+    private UserDto user;
+
+    private JobVacancyDto vacancy;
 
     private String coverLetter;
 
@@ -10,19 +12,31 @@ public class ApplyVacancyDto{
 
     private String email;
 
-    public ApplyVacancyDto(JobApplication entity) {
-        this.coverLetter = entity.getCoverLetter();
-        this.phone = entity.getPhone();
-        this.email = entity.getEmail();
-    }
-
-    public ApplyVacancyDto(String coverLetter, String phone, String email) {
+    public JobApplicationsDto(UserDto user, JobVacancyDto jobVacancy, String coverLetter, String phone, String email) {
+        this.user = user;
+        this.vacancy = jobVacancy;
         this.coverLetter = coverLetter;
         this.phone = phone;
         this.email = email;
     }
 
-    public ApplyVacancyDto() {
+    public JobApplicationsDto() {
+    }
+
+    public UserDto getUser() {
+        return user;
+    }
+
+    public void setUser(UserDto user) {
+        this.user = user;
+    }
+
+    public JobVacancyDto getVacancy() {
+        return vacancy;
+    }
+
+    public void setVacancy(JobVacancyDto vacancy) {
+        this.vacancy = vacancy;
     }
 
     public String getCoverLetter() {

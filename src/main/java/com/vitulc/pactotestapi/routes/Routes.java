@@ -52,6 +52,20 @@ public class Routes {
                         HttpMethod.POST, List.of(UserRole.USER.name()));
             }
         }
+
+        public static final class JobApplication {
+            public static final String path = Routes.root + "/job-applications/{vacancyId}";
+            public static final Map<HttpMethod, List<String>> authz = Map.of(
+                    HttpMethod.GET, List.of(UserRole.ADMIN.name()));
+        }
+
+        public static final class User {
+            public static final String root = Routes.root + "/user";
+
+            public static final class Me {
+                public static final String path = User.root + "/me";
+            }
+        }
     }
 
     public static List<String> routeNames(Class<?> clazz) {

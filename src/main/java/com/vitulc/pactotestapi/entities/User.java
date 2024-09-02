@@ -32,10 +32,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<JobApplication> jobApplications;
 
-    public User(String name, String email, String password, UserRole role) {
+    private String phone;
+
+    public User(String name, String email,  String phone, String password, UserRole role) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.phone = phone;
         this.role = role;
     }
 
@@ -89,5 +92,13 @@ public class User {
 
     public void setJobApplications(List<JobApplication> jobApplications) {
         this.jobApplications = jobApplications;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
