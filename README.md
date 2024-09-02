@@ -1,30 +1,67 @@
-# Documentação do Projeto
+# Documentação do Projeto Pacto-API
+
 ## Introdução
-Este documento descreve o projeto Pacto-API , desenvolvido para o processo seletivo da Pacto Soluções. Este backend foi construído para ser a api para um sistema de gerenciamento e candidatura de vagas internas.
 
-Como rodar essa API na sua maquina?
-### Pré requisitos:
-Ter o JAVA 17 ou superior instalado e a variável JAVA_HOME configurado nas variáveis de ambiente da sua máquina.
-Ter o git instalado, para ter acesso ao comando git clone no terminal.
-Ter o PostgreSQL 14 ou superior instalado.
-Clone o repositório usando o comando:
+O projeto **Pacto-API** foi desenvolvido como parte do processo seletivo da Pacto Soluções e serve como o backend de um sistema de gerenciamento e candidatura de vagas internas.
 
-`git clone https://github.com/vitolc/pacto-api.git`
+## Pré-requisitos
 
-Ou se preferir baixe o zip do projeto deste mesmo link.
+Antes de iniciar, certifique-se de que você possui os seguintes requisitos:
 
-### Iniciar Aplicação:
-Certifque-se de que há um banco de dados criado no postgres com nome pacto
-caso não houver, você pode criar um banco com este nome usando os seguintes comandos:
+- **Java 17 ou superior**: Com a variável `JAVA_HOME` configurada corretamente nas variáveis de ambiente do sistema.
+- **Git**: Para clonar o repositório utilizando o comando `git clone`.
+- **PostgreSQL 14 ou superior**: Para configurar e gerenciar o banco de dados.
 
-`psql -U postgres`
+## Instruções para Rodar a API
 
-após esse comando você terá que inserir a senha do usuario postgres(a senha padrão é postgres)
+### 1. Clonar o Repositório
 
-`create database pacto;`
+Clone o repositório do projeto usando o comando:
 
-Abra o terminal no diretório do projeto e execute o comando:
+```bash
+git clone https://github.com/vitolc/pacto-api.git
+```
 
-`./mvnw spring-boot:run`
+Ou, se preferir, faça o download do arquivo ZIP do projeto no mesmo link.
 
-Feito isso a api já deve estar rodando na porta 8080 da sua máquina.
+### 2. Configurar o Banco de Dados
+
+Certifique-se de que você possui um banco de dados PostgreSQL criado com o nome **pacto**. Se não houver, siga os passos abaixo para criar um:
+
+1. Abra o terminal e conecte-se ao PostgreSQL com o comando:
+
+   ```bash
+   psql -U postgres
+   ```
+
+2. Insira a senha do usuário `postgres` (por padrão, a senha é `postgres`).
+
+3. Crie o banco de dados com o seguinte comando:
+
+   ```sql
+   create database pacto;
+   ```
+
+### 3. Iniciar a Aplicação
+
+Com o banco de dados configurado, abra o terminal no diretório do projeto clonado e execute o seguinte comando para iniciar a aplicação:
+
+```bash
+./mvnw spring-boot:run
+```
+
+A API deve agora estar rodando na porta **8080** da sua máquina.
+
+## Contas de Teste
+
+Para facilitar o processo de teste, duas contas já foram pré-configuradas:
+
+- **Conta Admin**:
+  - **Email**: admin@example.com
+  - **Senha**: admin
+
+- **Conta User**:
+  - **Email**: user@example.com
+  - **Senha**: user
+
+Agora você está pronto para explorar e testar a **Pacto-API**!
