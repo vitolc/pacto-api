@@ -31,4 +31,8 @@ public class JobApplicationService {
     public Page<JobApplication> getAllApplications(Long vacancyId, int page, int itemsPerPage, Sort.Direction sortDirection) {
         return jobApplicationRepository.findAllApplicationsByVacancyId(vacancyId, PageRequest.of(page, itemsPerPage, Sort.by(sortDirection, "id")));
     }
+
+    public Page<JobApplication> getAllUserJobApplications(int page, int itemsPerPage, Sort.Direction sortDirection) {
+        return jobApplicationRepository.findAllApplicationsByUser(Utils.loggedUser().getId(), PageRequest.of(page, itemsPerPage, Sort.by(sortDirection, "id")));
+    }
 }

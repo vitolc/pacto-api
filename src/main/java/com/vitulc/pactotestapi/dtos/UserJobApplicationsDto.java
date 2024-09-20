@@ -1,8 +1,8 @@
 package com.vitulc.pactotestapi.dtos;
 
-public class JobApplicationsDto {
+public class UserJobApplicationsDto {
 
-    private UserDto user;
+    private Long id;
 
     private JobVacancyDto vacancy;
 
@@ -12,27 +12,15 @@ public class JobApplicationsDto {
 
     private String email;
 
-    public JobApplicationsDto(UserDto user, JobVacancyDto jobVacancy, String coverLetter, String phone, String email) {
-        this.user = user;
+    public UserJobApplicationsDto(JobVacancyDto jobVacancy, Long id, String coverLetter, String phone, String email) {
         this.vacancy = jobVacancy;
+        this.id = id;
         this.coverLetter = coverLetter;
         this.phone = phone;
         this.email = email;
     }
 
-    public JobApplicationsDto() {
-    }
-
-    public JobApplicationsDto(JobVacancyDto jobVacancyDto, String coverLetter, String phone, String email) {
-
-    }
-
-    public UserDto getUser() {
-        return user;
-    }
-
-    public void setUser(UserDto user) {
-        this.user = user;
+    public UserJobApplicationsDto() {
     }
 
     public JobVacancyDto getVacancy() {
@@ -41,6 +29,14 @@ public class JobApplicationsDto {
 
     public void setVacancy(JobVacancyDto vacancy) {
         this.vacancy = vacancy;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCoverLetter() {

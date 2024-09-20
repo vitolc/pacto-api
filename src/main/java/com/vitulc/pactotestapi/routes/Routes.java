@@ -54,9 +54,19 @@ public class Routes {
         }
 
         public static final class JobApplication {
-            public static final String path = Routes.root + "/job-applications/{vacancyId}";
-            public static final Map<HttpMethod, List<String>> authz = Map.of(
-                    HttpMethod.GET, List.of(UserRole.ADMIN.name()));
+            public static final String root = Routes.root + "/job-applications";
+
+            public static final class ByUser {
+                public static final String path = JobApplication.root + "/my-applications";
+                public static final Map<HttpMethod, List<String>> authz = Map.of(
+                        HttpMethod.GET, List.of(UserRole.USER.name()));
+            }
+
+            public static final class ByVacancyId {
+                public static final String path = JobApplication.root + "/by-id/{vacancyId}";
+                public static final Map<HttpMethod, List<String>> authz = Map.of(
+                        HttpMethod.GET, List.of(UserRole.ADMIN.name()));
+            }
         }
 
         public static final class User {

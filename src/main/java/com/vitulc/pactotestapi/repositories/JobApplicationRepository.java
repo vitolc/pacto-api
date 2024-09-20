@@ -17,4 +17,10 @@ public interface JobApplicationRepository extends PagingAndSortingRepository<Job
             WHERE ja.jobVacancy.id = :vacancyId
             """)
     Page<JobApplication> findAllApplicationsByVacancyId(@Param("vacancyId") Long vacancyId, Pageable pageable);
+
+    @Query("""
+            SELECT ja FROM JobApplication ja
+            WHERE ja.user.id = :userId
+            """)
+    Page<JobApplication> findAllApplicationsByUser(@Param("userId") Long userId, Pageable pageable);
 }

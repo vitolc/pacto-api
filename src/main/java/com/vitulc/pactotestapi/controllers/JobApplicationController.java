@@ -2,11 +2,9 @@ package com.vitulc.pactotestapi.controllers;
 
 import com.vitulc.pactotestapi.common.ResponseResult;
 import com.vitulc.pactotestapi.common.ResultPageDto;
-import com.vitulc.pactotestapi.dtos.ApplyVacancyDto;
-import com.vitulc.pactotestapi.dtos.JobApplicationsDto;
-import com.vitulc.pactotestapi.dtos.JobVacancyDto;
-import com.vitulc.pactotestapi.dtos.UserDto;
+import com.vitulc.pactotestapi.dtos.*;
 import com.vitulc.pactotestapi.entities.JobApplication;
+import com.vitulc.pactotestapi.entities.JobVacancy;
 import com.vitulc.pactotestapi.routes.Routes;
 import com.vitulc.pactotestapi.services.JobApplicationService;
 import jakarta.validation.Valid;
@@ -31,7 +29,7 @@ public class JobApplicationController {
         return ResponseResult.success(new ApplyVacancyDto(jobApplicationService.apply(vacancyId, applyVacancyDto)));
     }
 
-    @GetMapping(Routes.Dashboard.JobApplication.path)
+    @GetMapping(Routes.Dashboard.JobApplication.ByVacancyId.path)
     public ResponseResult<ResultPageDto<JobApplication, JobApplicationsDto>> getAllJobVacanciesPaginated(
             @PathVariable Long vacancyId,
             @RequestParam(required = false, defaultValue = "0") int page,
@@ -53,6 +51,31 @@ public class JobApplicationController {
                 jobApplicationPage.getTotalPages(),
                 jobApplicationPage.getNumber(),
                 jobApplicationDtos
+        );
+
+        return ResponseResult.success(resultPageDto);
+    }
+
+    @GetMapping(Routes.Dashboard.JobApplication.ByUser.path)
+    public ResponseResult<ResultPageDto<JobApplication, UserJobApplicationsDto>> getAllJobApplicationsByUserPaginated(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int itemsPerPage,
+            @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection) {
+
+        Page<JobApplication> jobApplicationPage = jobApplicationService.getAllUserJobApplications(page, itemsPerPage, sortDirection);
+
+        List<UserJobApplicationsDto> userJobApplicationsDtos = jobApplicationPage.getContent().stream()
+                .map(application -> {
+                    JobVacancyDto jobVacancyDto = new JobVacancyDto(application.getJobVacancy());
+                    return new UserJobApplicationsDto(jobVacancyDto, application.getId(), application.getCoverLetter(), application.getPhone(), application.getEmail());
+                })
+                .collect(Collectors.toList());
+
+        ResultPageDto<JobApplication, UserJobApplicationsDto> resultPageDto = ResultPageDto.of(
+                jobApplicationPage.getTotalElements(),
+                jobApplicationPage.getTotalPages(),
+                jobApplicationPage.getNumber(),
+                userJobApplicationsDtos
         );
 
         return ResponseResult.success(resultPageDto);
